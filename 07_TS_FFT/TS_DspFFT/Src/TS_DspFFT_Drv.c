@@ -47,12 +47,10 @@
  *
  *********************************************************************************/
 
-
 /**********************************************************************************
  *  Defines
  *
  *********************************************************************************/
-
 
 /**********************************************************************************
  *  Global Variables
@@ -60,17 +58,15 @@
  *********************************************************************************/
 RFFT_F32_STRUCT rfft;
 
-
 /**********************************************************************************
  * \function:       TS_DspFFT_Setup
  * \brief           main `0` numbers
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-void
-TS_DspFFT_Setup(float32 * p_prInputBuf, float32 * p_prOutputBuf,
-                float32 * p_prCoefBuf, float32 * p_prMagBuf,
-                Uint16 p_u16Size, Uint16 p_u16Stage)
+void TS_DspFFT_Setup(float32 *p_prInputBuf, float32 *p_prOutputBuf,
+                     float32 *p_prCoefBuf, float32 *p_prMagBuf,
+                     Uint16 p_u16Size, Uint16 p_u16Stage)
 {
     rfft.FFTSize = p_u16Size;
     rfft.FFTStages = p_u16Stage;
@@ -79,7 +75,7 @@ TS_DspFFT_Setup(float32 * p_prInputBuf, float32 * p_prOutputBuf,
     rfft.CosSinBuf = p_prCoefBuf;
     rfft.MagBuf = p_prMagBuf;
 
-    RFFT_f32_sincostable (&rfft);
+    RFFT_f32_sincostable(&rfft);
 }
 
 /**********************************************************************************
@@ -88,9 +84,8 @@ TS_DspFFT_Setup(float32 * p_prInputBuf, float32 * p_prOutputBuf,
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-void
-TS_DspFFT_BufInit(float32 * p_prInputBuf, float32 * p_prOutputBuf,
-                  float32 * p_prCoefBuf, float32 * p_prMagBuf)
+void TS_DspFFT_BufInit(float32 *p_prInputBuf, float32 *p_prOutputBuf,
+                       float32 *p_prCoefBuf, float32 *p_prMagBuf)
 {
     memset(p_prInputBuf, 0, sizeof(p_prInputBuf));
     memset(p_prOutputBuf, 0, sizeof(p_prOutputBuf));
@@ -104,11 +99,10 @@ TS_DspFFT_BufInit(float32 * p_prInputBuf, float32 * p_prOutputBuf,
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-void
-TS_DspFFT_Compute(void)
+void TS_DspFFT_Compute(void)
 {
 
-    RFFT_f32(&rfft);            /* Calculate FFT */
-    RFFT_f32_mag_TMU0(&rfft);   /* Calculate magnitude, result stored */
+    RFFT_f32(&rfft); /* Calculate FFT */
+    RFFT_f32_mag_TMU0(&rfft); /* Calculate magnitude, result stored */
 
 }

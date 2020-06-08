@@ -42,25 +42,20 @@
 #include "F2837xD_GlobalPrototypes.h"
 #include "F2837xD_Examples.h"
 
-
 /**********************************************************************************
  *  External Included Files
  *
  *********************************************************************************/
-
 
 /**********************************************************************************
  *  Defines
  *
  *********************************************************************************/
 
-
 /**********************************************************************************
  *  Global Variables
  *
  *********************************************************************************/
-
-
 
 /**********************************************************************************
  * \function:       TS_DspDrv_ConfigAdc
@@ -68,8 +63,7 @@
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-void
-TS_DspDrv_ConfigAdc(void)
+void TS_DspDrv_ConfigAdc(void)
 {
     EALLOW;
 
@@ -88,20 +82,20 @@ TS_DspDrv_ConfigAdc(void)
     DELAY_US(1000);
 
     /*
-    * ADC interrupt comes at the end of conversion
-    * EOC0 will trigger ADCA1_INT
-    * Enable ADCA_INT1
-    * Enable ADCA_INT1 Continuous mode
-    */
+     * ADC interrupt comes at the end of conversion
+     * EOC0 will trigger ADCA1_INT
+     * Enable ADCA_INT1
+     * Enable ADCA_INT1 Continuous mode
+     */
 
     AdcaRegs.ADCINTSEL1N2.bit.INT1SEL = 0;
     AdcaRegs.ADCINTSEL1N2.bit.INT1E = 1;
     AdcaRegs.ADCINTSEL1N2.bit.INT1CONT = 1;
 
     /*
-    * Determine minimum acquisition window (in SYSCLKS) based on
-    * resolution
-    */
+     * Determine minimum acquisition window (in SYSCLKS) based on
+     * resolution
+     */
     if (ADC_BITRESOLUTION_12BIT == AdcaRegs.ADCCTL2.bit.RESOLUTION)
     {
         /* Acquisitin time is 75ns */
@@ -114,9 +108,9 @@ TS_DspDrv_ConfigAdc(void)
     }
 
     /*
-    * set SOC0 channel select to ADCINA0
-    * set SOC0 start trigger on EPWM1A interrupt
-    */
+     * set SOC0 channel select to ADCINA0
+     * set SOC0 start trigger on EPWM1A interrupt
+     */
 
     AdcaRegs.ADCSOC0CTL.bit.CHSEL = 0;
     AdcaRegs.ADCSOC0CTL.bit.TRIGSEL = 5;

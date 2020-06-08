@@ -38,6 +38,4 @@
 
 void TS_DspDrv_ConfigAdc(void);
 
-
-
 #endif /* TS_DSPDRV_ADC_INC_TS_DSPDRV_ADC_H_ */

@@ -37,7 +37,6 @@
 #include "F2837xD_device.h"
 #include "F2837xD_EPwm_defines.h"
 
-
 /**********************************************************************************
  * \function:       TS_DspDrv_ConfigAdc
  * \brief           Configure the EPWMs
@@ -64,8 +63,7 @@
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-void
-TS_DspDrv_ConfigEpwm(void)
+void TS_DspDrv_ConfigEpwm(void)
 {
     /*
      *   Enable start of conversion (SOC) on A
@@ -92,28 +90,28 @@ TS_DspDrv_ConfigEpwm(void)
     EPwm1Regs.ETPS.bit.SOCAPRD = ET_1ST;
 
     /*
-    * For testing - monitor the EPWM1A output
-    * which toggles once every ePWM period (i.e
-    * at the start of conversion)
-    */
+     * For testing - monitor the EPWM1A output
+     * which toggles once every ePWM period (i.e
+     * at the start of conversion)
+     */
     EPwm1Regs.AQCTLA.bit.ZRO = AQ_TOGGLE;
     EPwm1Regs.TBCTL.bit.FREE_SOFT = 3;
 
     /*
-    * Disable the timer (counter mode is halt)
-    * Set the free/soft emulation bits to ignore the
-    * emulation halt (PWM will continue to count when
-    * the CPU is halted)
-    */
+     * Disable the timer (counter mode is halt)
+     * Set the free/soft emulation bits to ignore the
+     * emulation halt (PWM will continue to count when
+     * the CPU is halted)
+     */
 
     EPwm4Regs.TBCTL.bit.CTRMODE = 0x3;
     EPwm4Regs.TBCTL.bit.FREE_SOFT = 3;
 
     /*
-    * Clear the counter
-    * Set the period and timer phase
-    * Specify when the compare A event will occur
-    */
+     * Clear the counter
+     * Set the period and timer phase
+     * Specify when the compare A event will occur
+     */
 
     /* CLKDIV = /16 HSPCLKDIV =/2 */
     /* TBCLK = SYSCLK/32 */
@@ -125,10 +123,10 @@ TS_DspDrv_ConfigEpwm(void)
     EPwm4Regs.CMPA.bit.CMPA = TS_DSPDRV_EPWM4_DUTY_CYCLE;
 
     /*
-    * On compare A, when counting up, pull the EPWM A output high
-    * On compare A, when counting down, pull the EPWM A output low
-    * Set the counter to up/down count mode
-    */
+     * On compare A, when counting up, pull the EPWM A output high
+     * On compare A, when counting down, pull the EPWM A output low
+     * Set the counter to up/down count mode
+     */
 
     EPwm4Regs.AQCTLA.bit.CAU = AQ_SET;
     EPwm4Regs.AQCTLA.bit.CAD = AQ_CLEAR;

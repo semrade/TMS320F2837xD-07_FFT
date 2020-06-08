@@ -36,8 +36,4 @@
 #ifndef TS_DSPDRV_ADC_TS_DSPDRV_ADC_X_H_
 #define TS_DSPDRV_ADC_TS_DSPDRV_ADC_X_H_
 
-
-
-
-
 #endif /* TS_DSPDRV_ADC_TS_DSPDRV_ADC_X_H_ */

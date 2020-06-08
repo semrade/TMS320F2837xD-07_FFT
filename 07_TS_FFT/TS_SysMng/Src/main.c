@@ -69,7 +69,7 @@ float32 t_rOutBuf[RFFT_SIZE_BUF];
 
 /* Additional Buffer used in Magnitude calc */
 #pragma DATA_SECTION(t_rRfftMagBuf,"RFFTmagBuf");
-float32 t_rRfftMagBuf[RFFT_SIZE_BUF/2+1];
+float32 t_rRfftMagBuf[RFFT_SIZE_BUF / 2 + 1];
 
 /* Twiddle buffer */
 #pragma DATA_SECTION(t_rRfftF32Coef,"RFFTtwiddlesBuf");
@@ -83,8 +83,7 @@ Uint16 u16RunFFT = 0;
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-void
-main (void)
+void main(void)
 {
 
     /* Set up system flash and turn peripheral clocks */
@@ -110,13 +109,11 @@ main (void)
 
     /***********************Interrupt linking functions*****************************/
     EALLOW;
-    PieVectTable.ADCA1_INT         = &Adca1_ISR;
-    PieCtrlRegs.PIEIER1.bit.INTx1  = 0x01;
+    PieVectTable.ADCA1_INT = &Adca1_ISR;
+    PieCtrlRegs.PIEIER1.bit.INTx1 = 0x01;
     EDIS;
 
     /************************Peripheral Initialization*****************************/
-
-
 
     /* ADC configuration for interrupt and storing data */
     TS_DspDrv_ConfigAdc();
@@ -125,11 +122,12 @@ main (void)
     TS_DspDrv_ConfigEpwm();
 
     /* Buffer Initialization */
-    TS_DspFFT_BufInit(&t_rInpBuf[0], &t_rOutBuf[0], &t_rRfftF32Coef[0], &t_rRfftMagBuf[0]);
+    TS_DspFFT_BufInit(&t_rInpBuf[0], &t_rOutBuf[0], &t_rRfftF32Coef[0],
+                      &t_rRfftMagBuf[0]);
 
     /* Initialization of FFT object */
-    TS_DspFFT_Setup(&t_rInpBuf[0], &t_rOutBuf[0], &t_rRfftF32Coef[0], &t_rRfftMagBuf[0],
-                    1024u, 10u);
+    TS_DspFFT_Setup(&t_rInpBuf[0], &t_rOutBuf[0], &t_rRfftF32Coef[0],
+                    &t_rRfftMagBuf[0], 1024u, 10u);
 
     /* Enable group 1 interrupts */
     IER |= (M_INT1);
@@ -143,7 +141,7 @@ main (void)
     /* Infinite led loop */
     while (1)
     {
-        if(1u == u16RunFFT)
+        if (1u == u16RunFFT)
         {
             /* Run FFT algorithm */
             TS_DspFFT_Compute();
@@ -160,8 +158,7 @@ main (void)
  * \param[in]       void
  * \return          void
  **********************************************************************************/
-interrupt void
-Adca1_ISR(void)
+interrupt void Adca1_ISR(void)
 {
     /* Clear ADCINT1 flag */
     AdcaRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
