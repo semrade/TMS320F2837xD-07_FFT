@@ -60,8 +60,9 @@ RFFT_F32_STRUCT rfft;
 
 /**********************************************************************************
  * \function:       TS_DspFFT_Setup
- * \brief           main `0` numbers
- * \param[in]       void
+ * \brief           main `6` numbers
+ * \param[in]       p_prInputBuf,p_prOutputBuf,p_prCoefBuf,p_prMagBuf,p_u16Size,
+ *                  p_u16Stage
  * \return          void
  **********************************************************************************/
 void TS_DspFFT_Setup(float32 *p_prInputBuf, float32 *p_prOutputBuf,
@@ -80,8 +81,8 @@ void TS_DspFFT_Setup(float32 *p_prInputBuf, float32 *p_prOutputBuf,
 
 /**********************************************************************************
  * \function:       TS_DspFFT_BufInit
- * \brief           main `0` numbers
- * \param[in]       void
+ * \brief           main `4` numbers
+ * \param[in]       p_prInputBuf, p_prOutputBuf,p_prCoefBuf, p_prMagBuf
  * \return          void
  **********************************************************************************/
 void TS_DspFFT_BufInit(float32 *p_prInputBuf, float32 *p_prOutputBuf,
@@ -102,7 +103,10 @@ void TS_DspFFT_BufInit(float32 *p_prInputBuf, float32 *p_prOutputBuf,
 void TS_DspFFT_Compute(void)
 {
 
-    RFFT_f32(&rfft); /* Calculate FFT */
-    RFFT_f32_mag_TMU0(&rfft); /* Calculate magnitude, result stored */
+    /* Calculate FFT */
+    RFFT_f32(&rfft);
+
+    /* Calculate magnitude, result stored */
+    RFFT_f32_mag_TMU0(&rfft);
 
 }
