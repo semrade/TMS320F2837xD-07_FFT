@@ -41,7 +41,7 @@
 #include "F2837xD_Adc_defines.h"
 #include "F2837xD_GlobalPrototypes.h"
 #include "F2837xD_Examples.h"
-
+#include "TS_DspFFT_X.h"
 /**********************************************************************************
  *  External Included Files
  *
@@ -57,6 +57,8 @@
  *
  *********************************************************************************/
 
+Uint16 u16FftBufIndex = 0;
+Uint16 u16RunFFT = 0;
 /**********************************************************************************
  * \function:       TS_DspDrv_ConfigAdc
  * \brief           main `0` numbers
@@ -116,4 +118,29 @@ void TS_DspDrv_ConfigAdc(void)
     AdcaRegs.ADCSOC0CTL.bit.TRIGSEL = 5;
 
     EDIS;
+}
+/**********************************************************************************
+ * \function:       Adca1_ISR
+ * \brief           PIE1.1 @0x000D40  ADC-A interrupt #1
+ * \param[in]       void
+ * \return          void
+ **********************************************************************************/
+interrupt void TS_DspDrv_Adca1ISR(void)
+{
+    /* Clear ADCINT1 flag */
+    AdcaRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
+
+    /* Store the filtered output */
+    t_rInpBuf[u16FftBufIndex++] = AdcaResultRegs.ADCRESULT0 - (1 << 11);
+
+    /* Buffer is full start FFT */
+    if (u16FftBufIndex == 1024)
+    {
+        /* if the full FFT size is reached, set the runFFT flag */
+        u16RunFFT = 1;
+        u16FftBufIndex = 0;
+    }
+
+    /* Acknowledge the end-of-task interrupt for ADCA_INT1*/
+    PieCtrlRegs.PIEACK.all = M_INT1;
 }

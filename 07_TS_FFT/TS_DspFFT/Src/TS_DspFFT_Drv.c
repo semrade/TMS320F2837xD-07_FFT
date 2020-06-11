@@ -51,11 +51,33 @@
  *  Defines
  *
  *********************************************************************************/
-
+#define RFFT_SIZE_BUF 1024U
 /**********************************************************************************
  *  Global Variables
  *
  *********************************************************************************/
+/*  FFT Global tables */
+/*
+ * Buffer alignment for the input array,
+ * RFFT_f32u(optional), RFFT_f32(required)
+ * Output of FFT overwrites input if RFFT_STAGES is ODD
+ */
+#pragma DATA_SECTION(t_rInpBuf,"IOBufferBuf");
+float32 t_rInpBuf[RFFT_SIZE_BUF];
+
+/* Output of FFT here if RFFT_STAGES is EVEN */
+#pragma DATA_SECTION(t_rOutBuf,"IOBufferBuf");
+float32 t_rOutBuf[RFFT_SIZE_BUF];
+
+/* Additional Buffer used in Magnitude calc */
+#pragma DATA_SECTION(t_rRfftMagBuf,"RFFTmagBuf");
+float32 t_rRfftMagBuf[RFFT_SIZE_BUF / 2 + 1];
+
+/* Twiddle buffer */
+#pragma DATA_SECTION(t_rRfftF32Coef,"RFFTtwiddlesBuf");
+float32 t_rRfftF32Coef[RFFT_SIZE_BUF];
+
+/* FFT real project */
 RFFT_F32_STRUCT rfft;
 
 /**********************************************************************************

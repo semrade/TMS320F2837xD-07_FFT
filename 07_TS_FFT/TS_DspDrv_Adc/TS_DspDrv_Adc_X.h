@@ -35,5 +35,9 @@
  **********************************************************************************/
 #ifndef TS_DSPDRV_ADC_TS_DSPDRV_ADC_X_H_
 #define TS_DSPDRV_ADC_TS_DSPDRV_ADC_X_H_
+#include "F2837xD_device.h"
+extern Uint16 u16RunFFT;
 
+interrupt void TS_DspDrv_Adca1ISR(void);
+extern void TS_DspDrv_ConfigAdc(void);
 #endif /* TS_DSPDRV_ADC_TS_DSPDRV_ADC_X_H_ */

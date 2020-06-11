@@ -35,9 +35,19 @@
  **********************************************************************************/
 #ifndef TS_DSPFFT_TS_DSPFFT_X_H_
 #define TS_DSPFFT_TS_DSPFFT_X_H_
+#include "F2837xD_device.h"
 
+extern float32 t_rInpBuf[];
+extern float32 t_rOutBuf[];
+extern float32 t_rRfftMagBuf[];
+extern float32 t_rRfftF32Coef[];
 
+extern void TS_DspFFT_Setup(float32 * p_prInputBuf, float32 * p_prOutputBuf,
+                     float32 * p_prCoefBuf, float32 * p_prMagBuf,
+                     Uint16 p_u16Size, Uint16 p_u16Stage);
 
+extern void TS_DspFFT_BufInit(float32 * p_prInputBuf, float32 * p_prOutputBuf,
+                    float32 * p_prCoefBuf, float32 * p_prMagBuf);
 
-
+extern void TS_DspFFT_Compute(void);
 #endif /* TS_DSPFFT_TS_DSPFFT_X_H_ */

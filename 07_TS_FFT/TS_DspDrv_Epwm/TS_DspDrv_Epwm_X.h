@@ -36,4 +36,6 @@
 #ifndef TS_DSPDRV_EPWM_TS_DSPDRV_EPWM_X_H_
 #define TS_DSPDRV_EPWM_TS_DSPDRV_EPWM_X_H_
 
+extern void TS_DspDrv_ConfigEpwm(void);
+
 #endif /* TS_DSPDRV_EPWM_TS_DSPDRV_EPWM_X_H_ */
